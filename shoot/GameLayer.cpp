@@ -160,7 +160,7 @@ void GameLayer::enemyBulletMove(float t)
         //敌机子弹出屏幕删除
         if (sp->getPositionY() <= 0 - sp->getContentSize().height/2) {
             enemyBulletArray->removeObject(sp);
-            enemyBullet->enemyBulletBatchNode->removeChild(sp, true);
+            enemyBullet->enemyBulletBatchNode->removeChild(sp, false);
         }
     }
     
@@ -174,7 +174,7 @@ void GameLayer::enemyBulletMove(float t)
         //子弹出屏幕消失
         if (sp->getPositionY() >= getWinSize().height + sp->getContentSize().height/2) {
             playerBulletArray->removeObject(sp);
-            bullet->bulletBatchNode->removeChild(sp, true);
+            bullet->bulletBatchNode->removeChild(sp, false);
         }
     }
     
@@ -222,7 +222,7 @@ void GameLayer::check()
             player->playerShooted();
             enemyBulletArray->removeObject(enemyBulletSprite);
             deleteEnemyBulletArray->addObject(enemyBulletSprite);
-            enemyBullet->enemyBulletBatchNode->removeChild(enemyBulletSprite, true);
+//            enemyBullet->enemyBulletBatchNode->removeChild(enemyBulletSprite, true);
             
             //被击中减分
             score->subSocre();
@@ -240,14 +240,14 @@ void GameLayer::deleteSprite()
     {
         CCSprite *sp = (CCSprite*)obj;
         deletePlayerBulletArray->removeObject(sp);
-        bullet->bulletBatchNode->removeChild(sp, true);
+        bullet->bulletBatchNode->removeChild(sp, false);
     }
     
     CCARRAY_FOREACH(deleteEnemyBulletArray, obj)
     {
         CCSprite *sp = (CCSprite*)obj;
         deleteEnemyBulletArray->removeObject(sp);
-        enemyBullet->enemyBulletBatchNode->removeChild(sp, true);
+        enemyBullet->enemyBulletBatchNode->removeChild(sp, false);
     }
     
     CCARRAY_FOREACH(deleteEnemyArray, obj)
@@ -255,7 +255,7 @@ void GameLayer::deleteSprite()
         CCSprite *sp = (CCSprite*)obj;
         deleteEnemyArray->removeObject(sp);
         CCLog("%i",sp->getPositionY());
-        enemy->enemyBatchNode->removeChild(sp, true);
+        enemy->enemyBatchNode->removeChild(sp, false);
     }
 }
 
